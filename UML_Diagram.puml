@@ -1,0 +1,30 @@
+
+@startuml
+
+interface Observer {
+    +update(status)
+}
+
+class Order {
+    -status: String
+    -observers: List
+    +add_observer(observer)
+    +remove_observer(observer)
+    +set_status(new_status)
+}
+
+class SMSNotifier {
+    -customer_name: String
+    +update(status)
+}
+
+class KitchenNotifier {
+    +update(status)
+}
+
+Observer <|.. SMSNotifier
+Observer <|.. KitchenNotifier
+
+Order "1" o-- "*" Observer : observes
+
+@enduml
